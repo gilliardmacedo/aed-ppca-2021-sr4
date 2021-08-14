@@ -1,4 +1,5 @@
 
+from itertools import combinations 
 def carregaR(n):
     print('Informe, a probabilidade de acesso de cada registro em uma linha, separado por espaços.')
     print('Lembre-se de que a soma das probabilidades deve ser igual a 1.')
@@ -24,7 +25,14 @@ def validaIJ (i, j, m):
     else:
         return False
 
-def calculaCustoLatencia ( i, j, m):   
+def montaSubconjuntos (R):
+    lists = [[]]
+    for i in range(len(listaIndices) + 1):
+        for j in range(i):
+            lists.append(listaIndices[j:i])
+    return lists   
+
+def calculaCustoLatencia (i, j, m):   
     print(i, j, m) 
     varValida = validaIJ (i, j, m)
     if varValida == True:
@@ -34,14 +42,37 @@ def calculaCustoLatencia ( i, j, m):
             return (m - i + j - 1)
     else:
         return 'i ou j nao sao validos'
+def combinar (array, set):   
+    return list(combinations(array, set))
 
+m = input('Informe o numero total de partições:\n')
+m = int(m)  
 k = input('Informe o valor de referência k:\n')
 k = int(k)
 n = input('Informe o numero total de registros:\n')
 n = int(n)
 R = carregaR(n)
 
-print(R)
+# monta subconjunto com os índices dos elementos de R
+listaIndices = []
+for i in range(len(R)):
+    listaIndices.append(i)
+subconjuntos = montaSubconjuntos(listaIndices)
+
+subconjuntosTodasParticoes = []
+for i in range(m):
+    m = []
+    for j in range(len(subconjuntos)):
+        m.append(subconjuntos[j])
+    subconjuntosTodasParticoes.append({i:m})
+    print(subconjuntosTodasParticoes)
+
+
+
+
+Rcontrole = R
+
+print(subconjuntos)
 
 
 
