@@ -23,9 +23,7 @@ def montaSubconjuntos (R):
 def distancia (i, j, m):
     if not validaIJ(i, j, m):
         raise ValueError("Os valores %d e %d para i e j não são válidos" % (i, j))
-    diff = j - i - 1
-    d = diff if (i < j) else m + diff
-    print("Distancia %d , %d = %d" % (i, j, d))
+    d = j - i - 1 if (i < j) else m - i + j - 1
     return d
 
 def filtrarSubconjuntosRestantes(subconjuntosTotais, subconjuntoEscolhido):
@@ -63,12 +61,8 @@ def obterCombinacoes(todasCombinacoes, numSetores, solucaoAtual, idxEscolhidos, 
 def somarProbabilidades(indices, R):
     probs = []
     for idx in indices:
-        print("R[idx]: %f" % R[idx])
         probs.append(R[idx])
     soma = fsum(probs)
-    print("Soma dos indices: %f " % soma)
-    print(indices)
-    print(R)
     return soma 
     
 # Inicio
@@ -93,8 +87,6 @@ for i in range(len(R)):
         if i in sub:
             indiceSubconjuntos[i].append(sub)
 
-print(indiceSubconjuntos)
-
 todasCombinacoes = []
 solucaoAtual = []
 indicesJaEscolhidos = []
@@ -103,14 +95,14 @@ subconjuntosRestantes = subconjuntos.copy()
 obterCombinacoes(todasCombinacoes, m, solucaoAtual, indicesJaEscolhidos,
                  indicesRestantes, subconjuntosRestantes)
 
-print("Encontradas %d possíveis combinações" % len(todasCombinacoes))
+print("Encontradas %d possíveis combinações \n" % len(todasCombinacoes))
 
 indicesM = [i for i in range(1, m + 1)]
 possiveisParesEmM = [pair for pair in itertools.combinations(indicesM, 2)]
 
-maiorCustoLatencia = -1
-indMaiorCustoI = 0
-indMaiorCustoj = 0
+custoLatenciaSolucao = 999999
+indMaiorCustoISolucao = 0
+indMaiorCustoJSolucao = 0
 combinacaoSolucao = None
 # Cada uma das combinacoes nesse ponto é uma possivel organizacao dos m
 # setores, com m listas contendo os indices dos registros na lista/array
@@ -118,38 +110,45 @@ combinacaoSolucao = None
 # indica que o setor 1 está com os itens de indices 3 e 4 da entrada, ou seja,
 # o 4o e o 5o item(por causa dos indices em Python começando de zero)
 for combinacao in todasCombinacoes:
-    print("== Combinacao ==")
-    print(combinacao)
+    maiorCustoLatenciaCombinacao = -1
+    indMaiorCustoICombinacao = 0
+    indMaiorCustojCombinacao = 0
     # Aqui deve ser verificado o custo de latencia dessa combinacao
     # para cada par possivel i e j.
     for par in possiveisParesEmM:
         i = par[0]
         j = par[1]
-        print("i: %d, j: %d" % (i, j))
         # Subtrair 1 adequa os indices i e j do problema
         # aos indices de listas em Python
         probI = somarProbabilidades(combinacao[i - 1], R)
         probJ = somarProbabilidades(combinacao[j - 1], R)
-        print("probI: %f " % probI)
-        print("probJ: %f " % probJ)
-        print("d(i,j): %d " % distancia(i, j, m))
-        print("d(j,i): %d " % distancia(j, i, m))
         valorIJ = probI * probJ * distancia(i, j, m)
         valorJI = probI * probJ * distancia(j, i, m)
-        print("Valor i,j: %f " % valorIJ)
-        print("Valor j,i: %f " % valorJI)
-        if valorIJ > maiorCustoLatencia:
-            maiorCustoLatencia = valorIJ
-            indMaiorCustoI = i
-            indMaiorCustoJ = j
-            combinacaoSolucao = combinacao
-        if valorJI > maiorCustoLatencia:
-            maiorCustoLatencia = valorJI
-            indMaiorCustoI = j
-            indMaiorCustoJ = i
-            combinacaoSolucao = combinacao
+        if valorIJ > maiorCustoLatenciaCombinacao:
+            maiorCustoLatenciaCombinacao = valorIJ
+            indMaiorCustoICombinacao = i
+            indMaiorCustoJCombinacao = j
+        if valorJI > maiorCustoLatenciaCombinacao:
+            maiorCustoLatenciaCombinacao = valorJI
+            indMaiorCustoICombinacao = j
+            indMaiorCustoJCombinacao = i
             
-print("O maior custo de latência encontrado foi %f " % maiorCustoLatencia)
+    # Verifica se essa combinacao foi a de menor custo entre todas
+    if maiorCustoLatenciaCombinacao < custoLatenciaSolucao:
+        print("Nova solução candidata encontrada")
+        print(combinacao)
+        custoLatenciaSolucao = maiorCustoLatenciaCombinacao
+        indMaiorCustoISolucao = indMaiorCustoICombinacao
+        indMaiorCustoJSolucao = indMaiorCustoJCombinacao
+        combinacaoSolucao = combinacao
+    
+print("\n\n=== Solução ===")
+print("Número de registros: %d " % len(R))
 print("Disposição dos registros: ")
 print(combinacaoSolucao)
-print("O valor foi encontrado para i = %d e j = %d" % (indMaiorCustoI, indMaiorCustoJ))
+print("O maior custo de latência encontrado nessa solução foi %f " % custoLatenciaSolucao)
+print("O valor foi encontrado para i = %d e j = %d" % (indMaiorCustoISolucao, indMaiorCustoJSolucao))
+if custoLatenciaSolucao <= k:
+    print("Esse valor é MENOR ou IGUAL a K = %d" % k)
+else:
+    print("Esse valor é MAIOR que K = %d" % k)
