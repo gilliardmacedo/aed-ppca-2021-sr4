@@ -1,6 +1,9 @@
-Casos de teste trabalho AED
-
 4
 3
-5
 0.1 0.1 0.2 0.4 0.2
+
+Resultado programa: 
+0.320000 para i = 4 e j = 3
+na seguinte disposição: [0], [1], [3], [2, 4]]
+
+Resultado esperado:  ?
