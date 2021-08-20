@@ -1,7 +1,7 @@
+import itertools
 
-from itertools import combinations 
 def carregaR(n):
-    print('Informe, a probabilidade de acesso de cada registro em uma linha, separado por espaços.')
+    print('Informe a probabilidade de acesso de cada registro em uma linha, separado por espaços.')
     print('Lembre-se de que a soma das probabilidades deve ser igual a 1.')
 
     Rstring = input()
@@ -26,10 +26,10 @@ def validaIJ (i, j, m):
         return False
 
 def montaSubconjuntos (R):
-    lists = [[]]
-    for i in range(len(listaIndices) + 1):
-        for j in range(i):
-            lists.append(listaIndices[j:i])
+    lists = []
+    for length in range(1, len(R) + 1):
+        for subset in itertools.combinations(R, length):
+            lists.append(list(subset))
     return lists   
 
 def calculaCustoLatencia (i, j, m):   
@@ -42,14 +42,17 @@ def calculaCustoLatencia (i, j, m):
             return (m - i + j - 1)
     else:
         return 'i ou j nao sao validos'
+    
 def combinar (array, set):   
     return list(combinations(array, set))
 
-m = input('Informe o numero total de partições:\n')
+# Inicio
+
+m = input('Número total de partições (m):\n')
 m = int(m)  
-k = input('Informe o valor de referência k:\n')
+k = input('Valor de referência K:\n')
 k = int(k)
-n = input('Informe o numero total de registros:\n')
+n = input('Total de registros(n):\n')
 n = int(n)
 R = carregaR(n)
 
@@ -57,22 +60,22 @@ R = carregaR(n)
 listaIndices = []
 for i in range(len(R)):
     listaIndices.append(i)
+
+# Cria todas as combinações possíveis de todos os tamanhos para os índices
 subconjuntos = montaSubconjuntos(listaIndices)
 
-subconjuntosTodasParticoes = []
-for i in range(m):
-    m = []
-    for j in range(len(subconjuntos)):
-        m.append(subconjuntos[j])
-    subconjuntosTodasParticoes.append({i:m})
-    print(subconjuntosTodasParticoes)
+# Dicionario que mapeia os indices aos subconjuntos que o incluem
+indiceSubconjuntos = {}
+for i in range(len(R)):
+    indiceSubconjuntos[i] = []
+    for sub in subconjuntos:
+        if i in sub:
+            indiceSubconjuntos[i].append(sub)
 
+print(indiceSubconjuntos)
 
-
-
-Rcontrole = R
-
-print(subconjuntos)
+# Itera os subconjuntos colocando-os nas partições e para cada solução,
+# reduz o problema para as partições restantes
 
 
 
