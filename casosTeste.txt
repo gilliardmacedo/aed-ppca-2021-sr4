@@ -3,10 +3,11 @@
 0.1 0.1 0.2 0.4 0.2
 
 Resultado programa: 
+Número de registros: 5 
 Disposição dos registros: 
-[[0], [2], [1], [3, 4]]
-O maior custo de latência encontrado nessa solução foi 0.120000 
-O valor foi encontrado para i = 1 e j = 4
+[[0], [1], [3], [2, 4]]
+O maior custo de latência encontrado nessa solução foi 0.480000 
+O valor foi encontrado para i = 3 e j = 3
 
 Resultado esperado:  ?
 
@@ -17,10 +18,11 @@ Resultado esperado:  ?
 0.2 0.1 0.1 0.15 0.1 0.2 0.15
 
 Resultado programa: 
+Número de registros: 7 
 Disposição dos registros: 
-[[1], [2], [0, 3, 4, 5, 6]]
-O maior custo de latência encontrado nessa solução foi 0.080000 
-O valor foi encontrado para i = 1 e j = 3
+[[0, 1], [3, 5], [2, 4, 6]]
+O maior custo de latência encontrado nessa solução foi 0.245000 
+O valor foi encontrado para i = 2 e j = 2
 Esse valor é MENOR ou IGUAL a K = 1
 
 Resultado esperado:  ?
@@ -31,8 +33,150 @@ Resultado esperado:  ?
 0.2 0.1 0.1 0.15 0.1 0.2 0.15
 
 Resultado programa: 
+Número de registros: 7 
 Disposição dos registros: 
-[[0], [1, 2, 3, 4, 5, 6]]
-O maior custo de latência encontrado nessa solução foi 0.000000 
-O valor foi encontrado para i = 1 e j = 2
+[[0, 1, 5], [2, 3, 4, 6]]
+O maior custo de latência encontrado nessa solução foi 0.250000 
+O valor foi encontrado para i = 1 e j = 1
 Esse valor é MENOR ou IGUAL a K = 1
+
+
+==== Caso usado pela Stella ======
+
+3
+2
+0.3 0.2 0.1 0.4
+
+Disposição dos registros: 
+[[1, 2], [0], [3]]
+O custo total de latência dessa solução é 1.010000 
+Esse valor é MENOR ou IGUAL a K = 2
+
+===== Variando m com 10 registros =====
+
+2
+2
+0.17 0.03 0.07 0.23 0.18 0.07 0.03 0.02 0.1 0.1
+
+Resultado programa: 
+Disposição dos registros: 
+[[0, 3, 8], [1, 2, 4, 5, 6, 7, 9]]
+O custo total de latência dessa solução é 0.500000 
+Esse valor é MENOR ou IGUAL a K = 2
+--- Tempo de execução: 2.4845290184020996 segundos ---
+
+3
+2
+0.17 0.03 0.07 0.23 0.18 0.07 0.03 0.02 0.1 0.1
+
+Resultado programa: 
+Disposição dos registros: 
+[[3, 8], [0, 1, 6, 9], [2, 4, 5, 7]]
+O custo total de latência dessa solução é 1.000100 
+Esse valor é MENOR ou IGUAL a K = 2
+--- Tempo de execução: 10.502094745635986 segundos ---
+
+4
+2
+0.17 0.03 0.07 0.23 0.18 0.07 0.03 0.02 0.1 0.1
+
+Resultado programa:
+Disposição dos registros: 
+[[2, 4], [1, 3], [0, 5], [6, 7, 8, 9]]
+O custo total de latência dessa solução é 1.500400 
+Esse valor é MENOR ou IGUAL a K = 2
+--- Tempo de execução: 57.518680810928345 segundos ---
+
+5
+2
+0.17 0.03 0.07 0.23 0.18 0.07 0.03 0.02 0.1 0.1
+
+Resultado programa:
+Disposição dos registros: 
+[[4], [0, 1], [8, 9], [3], [2, 5, 6, 7]]
+O custo total de latência dessa solução é 2.003500 
+Esse valor é MAIOR que K = 2
+--- Tempo de execução: 332.9859628677368 segundos ---
+
+6
+2
+0.17 0.03 0.07 0.23 0.18 0.07 0.03 0.02 0.1 0.1
+
+Resultado programa:
+Disposição dos registros: 
+[[0], [3], [2, 5], [1, 8], [4], [6, 7, 9]]
+O custo total de latência dessa solução é 2.519600 
+Esse valor é MAIOR que K = 2
+--- Tempo de execução: 1320.361096382141 segundos ---
+
+===== Variando m com 6 registros =====
+
+2
+2
+0.15 0.2 0.1 0.3 0.15 0.1
+
+Resultado programa:
+Disposição dos registros: 
+[[1, 3], [0, 2, 4, 5]]
+O custo total de latência dessa solução é 0.500000 
+Esse valor é MENOR ou IGUAL a K = 2
+--- Tempo de execução: 0.4816157817840576 segundos ---
+
+3
+2
+0.15 0.2 0.1 0.3 0.15 0.1
+
+Resultado programa:
+Disposição dos registros: 
+[[0, 1], [3], [2, 4, 5]]
+O custo total de latência dessa solução é 1.002500 
+Esse valor é MENOR ou IGUAL a K = 2
+--- Tempo de execução: 0.650745153427124 segundos ---
+
+
+4
+2
+0.15 0.2 0.1 0.3 0.15 0.1
+
+Resultado programa:
+Disposição dos registros: 
+[[1], [3], [0, 2], [4, 5]]
+O custo total de latência dessa solução é 1.510000 
+Esse valor é MENOR ou IGUAL a K = 2
+--- Tempo de execução: 1.1144108772277832 segundos ---
+
+5
+2
+0.15 0.2 0.1 0.3 0.15 0.1
+
+Resultado programa:
+Disposição dos registros: 
+[[1], [0], [2, 5], [3], [4]]
+O custo total de latência dessa solução é 2.037500 
+Esse valor é MAIOR que K = 2
+--- Tempo de execução: 1.3452460765838623 segundos ---
+
+6
+2
+0.15 0.2 0.1 0.3 0.15 0.1
+
+Resultado programa:
+Disposição dos registros: 
+[[1], [0], [3], [2], [4], [5]]
+O custo total de latência dessa solução é 2.585000 
+Esse valor é MAIOR que K = 2
+--- Tempo de execução: 0.9180688858032227 segundos ---
+
+=========== Sem resposta ============
+5
+2
+0.03 0.03 0.05 0.03 0.03 0.03 0.01 0.04 0.02 0.02 0.01 0.1 0.1 0.04 0.04 0.02 0.05 0.03 0.02 0.1 0.1 0.1
+
+Resultado programa: 
+
+
+10
+2
+0.03 0.03 0.05 0.03 0.03 0.03 0.01 0.04 0.02 0.02 0.01 0.1 0.1 0.04 0.04 0.02 0.05 0.03 0.02 0.1 0.1 0.1
+
+Resultado programa: 
