@@ -1,13 +1,19 @@
+# Implementação de algoritmo genético para solução do SR4
+# utilizando o cálculo exato como teste
+
 import math
 import time
 import random
 import itertools
 
 # Parâmetros
-NUM_GERACOES = 100
+NUM_GERACOES = 50
 TAMANHO_POPULACAO = 30
 TAMANHO_SELECAO = 6
 TAMANHO_CROSSOVER = 24
+PROBABILIDADE_MUTACAO = 0.1
+NUM_STEPS_MUTACAO_REMANESCENTES = 2
+NUM_STEPS_MUTACAO_CROSSOVER = 3
 
 # População inicial
 def populacaoInicial(n, m, tamanhoPop):
@@ -120,8 +126,23 @@ def crossover(particaoI, particaoJ, R, media):
     tratarResultado(resultadoCrossover, R)
     return resultadoCrossover[:]
 
-def mutacao(particao):
-    variavel = 1
+def mutacao(particao, probabilidade, numSteps):
+    for i in range(numSteps):
+        if random.random() <= probabilidade:
+            setorModificado = random.choice(particao)
+            idxModificado = random.randrange(0, len(setorModificado))
+            if setorModificado[idxModificado] == 0:
+                # troca de 0 pra 1 depois de retirar o 1 do setor que originalmente possuia o registro
+                for setor in particao:
+                    if setor[idxModificado] == 1:
+                        setor[idxModificado] = 0
+                setorModificado[idxModificado] = 1
+            else:
+                # troca de 1 pra 0 e depois atribui o registro a outro setor
+                setorModificado[idxModificado] = 0
+                novoSetor = random.choice(particao)
+                novoSetor[idxModificado] = 1
+    
 
 def printProbabilidades(solucao, R):
     setores = []
@@ -185,13 +206,15 @@ for geracao in range(NUM_GERACOES):
     scores = [erroParticao(populacao[i], R, media) for i in range(len(populacao))]
     indicesOrdenados = obterIndicesProxGeracao(scores)
     novaPopulacao = [populacao[i][:] for i in indicesOrdenados]
+    for solucao in novaPopulacao:
+        mutacao(solucao, PROBABILIDADE_MUTACAO, NUM_STEPS_MUTACAO_REMANESCENTES)
     paresCrossover = obterParesCrossover(indicesOrdenados)
     for par in paresCrossover:
         i = par[0]
         j = par[1]
-        novaPopulacao.append(crossover(populacao[i][:], populacao[j][:], R, media))
-    for particao in novaPopulacao:
-        mutacao(particao)
+        novoIndividuo = crossover(populacao[i][:], populacao[j][:], R, media)
+        mutacao(novoIndividuo, PROBABILIDADE_MUTACAO, NUM_STEPS_MUTACAO_CROSSOVER)
+        novaPopulacao.append(novoIndividuo)
     populacao = novaPopulacao[:]
 
 scores = [erroParticao(populacao[i], R, media) for i in range(len(populacao))]
@@ -200,8 +223,7 @@ print("Solução")
 individuo = populacao[idxSolucao]
 solucao = solucaoPrintavel(individuo)
 print(solucao)
-print("Custo de latencia")
-print(calcularCustoLatencia(R, m, solucao))
-    
+custoLatenciaSolucao = calcularCustoLatencia(R, m, solucao)
+print("O custo total de latência dessa solução é %f " % custoLatenciaSolucao)    
 
-print("--- Tempo de execução: %s segundos ---" % (time.time() - start_time))
+print("--- Tempo de execução: %.4f segundos ---" % (time.time() - start_time))

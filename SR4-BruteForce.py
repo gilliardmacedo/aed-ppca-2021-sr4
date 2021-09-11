@@ -1,7 +1,6 @@
 import itertools
 from math import fsum
 import time
-start_time = time.time()
 
 def carregaR():
     inputMsg = ("Informe as probabilidades de acesso de cada registro em uma linha, separadas por espaços.\n"
@@ -74,6 +73,7 @@ m = int(m)
 k = input('Valor de referência K:\n')
 k = int(k)
 R = carregaR()
+start_time = time.time()
 
 # monta subconjunto com os índices dos elementos de R
 listaIndices = [i for i in range(len(R))]
@@ -145,4 +145,4 @@ if custoLatenciaSolucao <= k:
     print("Esse valor é MENOR ou IGUAL a K = %d" % k)
 else:
     print("Esse valor é MAIOR que K = %d" % k)
-print("--- Tempo de execução: %s segundos ---" % (time.time() - start_time))
+print("--- Tempo de execução: %.4f segundos ---" % (time.time() - start_time))
