@@ -4,7 +4,7 @@ Nesse repositório estão os arquivos para resolução do problema NP Completo S
 
 
 
-O programa principal, com interface gráfica, é o sistemaAnaliseSR4_Funcional.py
+O programa principal, com interface gráfica, é o [SR4-InterfaceVisual.py](https://github.com/gilliardmacedo/aed-ppca-2021-sr4/blob/master/SR4-InterfaceVisual.py)
 
 
 ## Soluções
