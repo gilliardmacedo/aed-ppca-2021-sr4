@@ -203,9 +203,9 @@ class Sistema:
         self.labelSaidasAlgoritmoExatoTempoExecucao.place(x = 40, y = 320)
         
 
-    # Função que representa o encapsulamento da solução do "Algoritmo Genético Heurístico" (SR4-GA-heuristic.py) 
+    # Função que representa o encapsulamento da solução do "Algoritmo Genético Função Fitness Média Esperada" (SR4-GA-heuristic.py) 
     # para solução do SR4 utilizando o cálculo exato como teste
-    def algoritmoGeneticoHeuristico(self):
+    def algoritmoGeneticoMediaEsperada(self):
         
         # Parâmetros
         NUM_GERACOES = 50
@@ -231,9 +231,9 @@ class Sistema:
             R = list(float(prob) for prob in probabilidades.get().strip().split())
             somaProbability = math.fsum(R)
             if somaProbability != 1:
-                saidasAlgoritmoGeneticoHeuristicoSomaInvalidaProbabilidades.set("A soma das probabilidades deve ser igual a 1") 
-                self.labelSaidasAlgoritmoGeneticoHeuristicoSomaInvalidaProbabilidades = Label(janela, textvariable=saidasAlgoritmoGeneticoHeuristicoSomaInvalidaProbabilidades)                
-                self.labelSaidasAlgoritmoGeneticoHeuristicoSomaInvalidaProbabilidades.place(x = 40, y = 180)                               
+                saidasAlgoritmoGeneticoMediaEsperadaSomaInvalidaProbabilidades.set("A soma das probabilidades deve ser igual a 1") 
+                self.labelSaidasAlgoritmoGeneticoMediaEsperadaSomaInvalidaProbabilidades = Label(janela, textvariable=saidasAlgoritmoGeneticoMediaEsperadaSomaInvalidaProbabilidades)                
+                self.labelSaidasAlgoritmoGeneticoMediaEsperadaSomaInvalidaProbabilidades.place(x = 40, y = 180)                               
                 raise ValueError("A soma das probabilidades deve ser igual a 1")
             return R
 
@@ -426,28 +426,28 @@ class Sistema:
         solucao = solucaoPrintavel(individuo)
         custoLatenciaSolucao = calcularCustoLatencia(R, m, solucao)
 
-        # Registra a execução do algoritmo genetico heuristico
-        algoritmoGeneticoHeuristicoExecutado.set(True)
+        # Registra a execução do algoritmo genetico função fitness média esperada
+        algoritmoGeneticoMediaEsperadaExecutado.set(True)
 
-        # O bloco abaixo é responsável por exibir a resposta da execução do algoritmo genetico heuristico
-        self.labelSaidasAlgoritmoGeneticoHeuristicoSolucao = Label(janela, text = "=== Solução Aproximada com Heurística ===")
-        self.labelSaidasAlgoritmoGeneticoHeuristicoSolucao.place(x = 40, y = 220)
-        self.labelSaidasAlgoritmoGeneticoHeuristicoNumRegistros = Label(janela, text = "Número de registros: %d " % len(R))
-        self.labelSaidasAlgoritmoGeneticoHeuristicoNumRegistros.place(x = 40, y = 240)
-        self.labelSaidasAlgoritmoGeneticoHeuristicoDispRegistros = Label(janela, text = "Disposição dos registros: ")
-        self.labelSaidasAlgoritmoGeneticoHeuristicoDispRegistros.place(x = 40, y = 260)
-        self.labelSaidasAlgoritmoGeneticoHeuristicoCombSolucao = Label(janela, text = solucao)
-        self.labelSaidasAlgoritmoGeneticoHeuristicoCombSolucao.place(x = 175, y = 260)
-        self.labelSaidasAlgoritmoGeneticoHeuristicoCustoLatencia = Label(janela, text = "O custo total de latência dessa solução é %f " % custoLatenciaSolucao)
-        self.labelSaidasAlgoritmoGeneticoHeuristicoCustoLatencia.place(x = 40, y = 280)
+        # O bloco abaixo é responsável por exibir a resposta da execução do algoritmo genetico função fitness média esperada
+        self.labelSaidasAlgoritmoGeneticoMediaEsperadaSolucao = Label(janela, text = "=== Solução Aproximada com Função Fitness Média Esperada ===")
+        self.labelSaidasAlgoritmoGeneticoMediaEsperadaSolucao.place(x = 40, y = 220)
+        self.labelSaidasAlgoritmoGeneticoMediaEsperadaNumRegistros = Label(janela, text = "Número de registros: %d " % len(R))
+        self.labelSaidasAlgoritmoGeneticoMediaEsperadaNumRegistros.place(x = 40, y = 240)
+        self.labelSaidasAlgoritmoGeneticoMediaEsperadaDispRegistros = Label(janela, text = "Disposição dos registros: ")
+        self.labelSaidasAlgoritmoGeneticoMediaEsperadaDispRegistros.place(x = 40, y = 260)
+        self.labelSaidasAlgoritmoGeneticoMediaEsperadaCombSolucao = Label(janela, text = solucao)
+        self.labelSaidasAlgoritmoGeneticoMediaEsperadaCombSolucao.place(x = 175, y = 260)
+        self.labelSaidasAlgoritmoGeneticoMediaEsperadaCustoLatencia = Label(janela, text = "O custo total de latência dessa solução é %f " % custoLatenciaSolucao)
+        self.labelSaidasAlgoritmoGeneticoMediaEsperadaCustoLatencia.place(x = 40, y = 280)
         if custoLatenciaSolucao <= k:
-            self.labelSaidasAlgoritmoGeneticoHeuristicoValorK = Label(janela, text = "Esse valor é MENOR ou IGUAL a K = %d" % k)
-            self.labelSaidasAlgoritmoGeneticoHeuristicoValorK.place(x = 40, y = 300)
+            self.labelSaidasAlgoritmoGeneticoMediaEsperadaValorK = Label(janela, text = "Esse valor é MENOR ou IGUAL a K = %d" % k)
+            self.labelSaidasAlgoritmoGeneticoMediaEsperadaValorK.place(x = 40, y = 300)
         else:
-            self.labelSaidasAlgoritmoGeneticoHeuristicoValorK = Label(janela, text = "Esse valor é MAIOR que K = %d" % k)
-            self.labelSaidasAlgoritmoGeneticoHeuristicoValorK.place(x = 40, y = 300)
-        self.labelSaidasAlgoritmoGeneticoHeuristicoTempoExecucao = Label(janela, text = "Tempo de execução: %s segundos" % (time.time() - start_time))
-        self.labelSaidasAlgoritmoGeneticoHeuristicoTempoExecucao.place(x = 40, y = 320)
+            self.labelSaidasAlgoritmoGeneticoMediaEsperadaValorK = Label(janela, text = "Esse valor é MAIOR que K = %d" % k)
+            self.labelSaidasAlgoritmoGeneticoMediaEsperadaValorK.place(x = 40, y = 300)
+        self.labelSaidasAlgoritmoGeneticoMediaEsperadaTempoExecucao = Label(janela, text = "Tempo de execução: %s segundos" % (time.time() - start_time))
+        self.labelSaidasAlgoritmoGeneticoMediaEsperadaTempoExecucao.place(x = 40, y = 320)
   
     # Função que representa o encapsulamento da solução do "Algoritmo Genético Custo de Latência" (SR4-GA-latencyCost.py) 
     # para solução do SR4 utilizando o cálculo exato como teste
@@ -671,7 +671,7 @@ class Sistema:
         algoritmoGeneticoCustoLatenciaExecutado.set(True)
 
         # O bloco abaixo é responsável por exibir a resposta da execução do algoritmo genetico custo de latencia
-        self.labelSaidasAlgoritmoGeneticoCustoLatenciaSolucao = Label(janela, text = "=== Solução Aproximada com Custo de Latência ===")
+        self.labelSaidasAlgoritmoGeneticoCustoLatenciaSolucao = Label(janela, text = "=== Solução Aproximada com Função Fitness Custo de Latência ===")
         self.labelSaidasAlgoritmoGeneticoCustoLatenciaSolucao.place(x = 40, y = 220)
         self.labelSaidasAlgoritmoGeneticoCustoLatenciaNumRegistros = Label(janela, text = "Número de registros: %d " % len(R))
         self.labelSaidasAlgoritmoGeneticoCustoLatenciaNumRegistros.place(x = 40, y = 240)
@@ -703,8 +703,8 @@ class Sistema:
             self.EntradaValorReferencia.delete(0,"end")
             self.EntradaProbabilidades.delete(0,"end")
             self.limparLabelsExecucao()
-        elif (algoritmoGeneticoHeuristicoExecutado.get() 
-            or saidasAlgoritmoGeneticoHeuristicoSomaInvalidaProbabilidades.get() != ""
+        elif (algoritmoGeneticoMediaEsperadaExecutado.get() 
+            or saidasAlgoritmoGeneticoMediaEsperadaSomaInvalidaProbabilidades.get() != ""
             or numTotParticoes.get() != "" 
             or valorReferencia.get() != ""
             or probabilidades.get() != ""):
@@ -739,8 +739,8 @@ class Sistema:
             self.botaoExecutar.destroy()
             self.botaoLimpar.destroy()
             self.limparLabelsExecucao()
-        elif (telaAlgoritmoGeneticoHeuristicoVisitada.get()):
-            self.labelTituloAlgoritmoGeneticoHeuristico.config(text="")
+        elif (telaAlgoritmoGeneticoMediaEsperadaVisitada.get()):
+            self.labelTituloAlgoritmoGeneticoMediaEsperada.config(text="")
             self.labelNumTotParticoes.config(text="")            
             self.EntradaNumeroTotalParticoes.delete(0,"end") 
             self.EntradaNumeroTotalParticoes.destroy()
@@ -784,8 +784,8 @@ class Sistema:
             saidasAlgoritmoExatoSomaInvalidaProbabilidades.set("")
         elif (saidasAlgoritmoExatoValoresInvalidosIeJ.get() != ""):
             saidasAlgoritmoExatoValoresInvalidosIeJ.set("")
-        elif (saidasAlgoritmoGeneticoHeuristicoSomaInvalidaProbabilidades.get() != ""):            
-            saidasAlgoritmoGeneticoHeuristicoSomaInvalidaProbabilidades.set("")
+        elif (saidasAlgoritmoGeneticoMediaEsperadaSomaInvalidaProbabilidades.get() != ""):            
+            saidasAlgoritmoGeneticoMediaEsperadaSomaInvalidaProbabilidades.set("")
         elif (saidasAlgoritmoGeneticoCustoLatenciaSomaInvalidaProbabilidades.get() != ""):            
             saidasAlgoritmoGeneticoCustoLatenciaSomaInvalidaProbabilidades.set("")
         if (algoritmoExatoExecutado.get()):
@@ -797,14 +797,14 @@ class Sistema:
             self.labelSaidasAlgoritmoExatoCustoLatencia.config(text="")
             self.labelSaidasAlgoritmoExatoValorK.config(text="")
             self.labelSaidasAlgoritmoExatoTempoExecucao.config(text="")
-        elif (algoritmoGeneticoHeuristicoExecutado.get()):         
-            self.labelSaidasAlgoritmoGeneticoHeuristicoSolucao.config(text="")
-            self.labelSaidasAlgoritmoGeneticoHeuristicoNumRegistros.config(text="")
-            self.labelSaidasAlgoritmoGeneticoHeuristicoDispRegistros.config(text="")
-            self.labelSaidasAlgoritmoGeneticoHeuristicoCombSolucao.config(text="")
-            self.labelSaidasAlgoritmoGeneticoHeuristicoCustoLatencia.config(text="")
-            self.labelSaidasAlgoritmoGeneticoHeuristicoValorK.config(text="")
-            self.labelSaidasAlgoritmoGeneticoHeuristicoTempoExecucao.config(text="")          
+        elif (algoritmoGeneticoMediaEsperadaExecutado.get()):         
+            self.labelSaidasAlgoritmoGeneticoMediaEsperadaSolucao.config(text="")
+            self.labelSaidasAlgoritmoGeneticoMediaEsperadaNumRegistros.config(text="")
+            self.labelSaidasAlgoritmoGeneticoMediaEsperadaDispRegistros.config(text="")
+            self.labelSaidasAlgoritmoGeneticoMediaEsperadaCombSolucao.config(text="")
+            self.labelSaidasAlgoritmoGeneticoMediaEsperadaCustoLatencia.config(text="")
+            self.labelSaidasAlgoritmoGeneticoMediaEsperadaValorK.config(text="")
+            self.labelSaidasAlgoritmoGeneticoMediaEsperadaTempoExecucao.config(text="")          
         elif (algoritmoGeneticoCustoLatenciaExecutado.get()):         
             self.labelSaidasAlgoritmoGeneticoCustoLatenciaSolucao.config(text="")
             self.labelSaidasAlgoritmoGeneticoCustoLatenciaNumRegistros.config(text="")
@@ -856,21 +856,21 @@ class Sistema:
         telaAlgoritmoExatoVisitada.set(True)
 
         # Apagando todos os registros de atividades realizadas anteriores a esta
-        algoritmoGeneticoHeuristicoExecutado.set(False)
+        algoritmoGeneticoMediaEsperadaExecutado.set(False)
         algoritmoGeneticoCustoLatenciaExecutado.set(False)
-        telaAlgoritmoGeneticoHeuristicoVisitada.set(False)
+        telaAlgoritmoGeneticoMediaEsperadaVisitada.set(False)
         telaAlgoritmoGeneticoCustoLatenciaVisitada.set(False)
         telaTodoVisitada.set(False)
         telaDescricaoProblemaVisitada.set(False)
         telaSobreVisitada.set(False)
 
-    # Monta a tela de entrada inicial dos dados relativo ao algoritmo genetico heuristico
-    def telaAlgoritmoGeneticoHeuristico(self):
-        # Limpa a tela antes de montar a tela do Algoritmo genetico heurístico
+    # Monta a tela de entrada inicial dos dados relativo ao algoritmo genetico com função fitness da média esperada
+    def telaAlgoritmoGeneticoMediaEsperada(self):
+        # Limpa a tela antes de montar a tela do Algoritmo genetico com função fitness da média esperada
         self.limparTela()
 
-        self.labelTituloAlgoritmoGeneticoHeuristico = Label(janela, text = "ALGORITMO GENÉTICO HEURÍSTICO")
-        self.labelTituloAlgoritmoGeneticoHeuristico.place(x = 300, y = 10)
+        self.labelTituloAlgoritmoGeneticoMediaEsperada = Label(janela, text = "ALGORITMO GENÉTICO MÉDIA ESPERADA")
+        self.labelTituloAlgoritmoGeneticoMediaEsperada.place(x = 300, y = 10)
         
         # Label da entrada do número total de partições (m) 
         self.labelNumTotParticoes = Label(janela, text = "Número total de partições (m):")
@@ -895,7 +895,7 @@ class Sistema:
         self.labelLegendaProbabilidades.place(x = 230, y = 160)
 
         # Botão que executa o Algoritmo genetico
-        self.botaoExecutar = Button(janela, text = "Executar", command = self.algoritmoGeneticoHeuristico)
+        self.botaoExecutar = Button(janela, text = "Executar", command = self.algoritmoGeneticoMediaEsperada)
         self.botaoExecutar.place(x = 500, y = 160)
 
         # Botão que limpa a tela
@@ -903,7 +903,7 @@ class Sistema:
         self.botaoLimpar.place(x = 650, y = 160)
 
         # Registra que a tela do Algoritmo genetico foi visitada
-        telaAlgoritmoGeneticoHeuristicoVisitada.set(True)
+        telaAlgoritmoGeneticoMediaEsperadaVisitada.set(True)
 
         # Apagando todos os registros de atividades realizadas anteriores a esta                
         algoritmoExatoExecutado.set(False)
@@ -957,9 +957,9 @@ class Sistema:
 
         # Apagando todos os registros de atividades realizadas anteriores a esta                
         algoritmoExatoExecutado.set(False)
-        algoritmoGeneticoHeuristicoExecutado.set(False)
+        algoritmoGeneticoMediaEsperadaExecutado.set(False)
         telaAlgoritmoExatoVisitada.set(False)
-        telaAlgoritmoGeneticoHeuristicoVisitada.set(False)
+        telaAlgoritmoGeneticoMediaEsperadaVisitada.set(False)
         telaTodoVisitada.set(False)
         telaDescricaoProblemaVisitada.set(False)
         telaSobreVisitada.set(False)
@@ -977,10 +977,10 @@ class Sistema:
 
         # Apagando todos os registros de atividades realizadas anteriores a esta
         algoritmoExatoExecutado.set(False)
-        algoritmoGeneticoHeuristicoExecutado.set(False)
+        algoritmoGeneticoMediaEsperadaExecutado.set(False)
         algoritmoGeneticoCustoLatenciaExecutado.set(False)
         telaAlgoritmoExatoVisitada.set(False)
-        telaAlgoritmoGeneticoHeuristicoVisitada.set(False)
+        telaAlgoritmoGeneticoMediaEsperadaVisitada.set(False)
         telaDescricaoProblemaVisitada.set(False)
         telaSobreVisitada.set(False)
 
@@ -1008,10 +1008,10 @@ class Sistema:
 
         # Apagando todos os registros de atividades realizadas anteriores a esta
         algoritmoExatoExecutado.set(False)
-        algoritmoGeneticoHeuristicoExecutado.set(False)
+        algoritmoGeneticoMediaEsperadaExecutado.set(False)
         algoritmoGeneticoCustoLatenciaExecutado.set(False)
         telaAlgoritmoExatoVisitada.set(False)
-        telaAlgoritmoGeneticoHeuristicoVisitada.set(False)
+        telaAlgoritmoGeneticoMediaEsperadaVisitada.set(False)
         telaAlgoritmoGeneticoCustoLatenciaVisitada.set(False)        
         telaTodoVisitada.set(False)
         telaSobreVisitada.set(False)
@@ -1043,7 +1043,7 @@ class Sistema:
 
         # Apagando todos os registros de atividades realizadas anteriores a esta
         telaAlgoritmoExatoVisitada.set(False)
-        telaAlgoritmoGeneticoHeuristicoVisitada.set(False)
+        telaAlgoritmoGeneticoMediaEsperadaVisitada.set(False)
         telaAlgoritmoGeneticoCustoLatenciaVisitada.set(False)
         telaDescricaoProblemaVisitada.set(False)
         telaTodoVisitada.set(False)
@@ -1064,12 +1064,12 @@ class Sistema:
 
         # Construindo o submenu do sistema algoritmo aproximado
         subMenuAlgoritmoAproximado = tk.Menu(menuASR4, tearoff=0)
-        subMenuAlgoritmoAproximado.add_command(label="Algoritmo Genético Heurístico", command=self.telaAlgoritmoGeneticoHeuristico)
-        subMenuAlgoritmoAproximado.add_command(label="Algoritmo Genético Custo de Latência", command=self.telaAlgoritmoGeneticoCustoLatencia)
+        subMenuAlgoritmoAproximado.add_command(label="Função Fitness da Média Esperada", command=self.telaAlgoritmoGeneticoMediaEsperada)
+        subMenuAlgoritmoAproximado.add_command(label="Função Fitness do Custo de Latência", command=self.telaAlgoritmoGeneticoCustoLatencia)
 
         # Adicionando ao menubar
         menuASR4.add_cascade(
-            label="Algoritmo Aproximado",
+            label="Algoritmo Genético com",
             menu=subMenuAlgoritmoAproximado
         )
                 
@@ -1098,14 +1098,14 @@ if __name__ == "__main__":
     valorReferencia = tk.StringVar()
     probabilidades = tk.StringVar()
     saidasAlgoritmoExatoSomaInvalidaProbabilidades = tk.StringVar()
-    saidasAlgoritmoGeneticoHeuristicoSomaInvalidaProbabilidades = tk.StringVar()
+    saidasAlgoritmoGeneticoMediaEsperadaSomaInvalidaProbabilidades = tk.StringVar()
     saidasAlgoritmoGeneticoCustoLatenciaSomaInvalidaProbabilidades = tk.StringVar()
     saidasAlgoritmoExatoValoresInvalidosIeJ = tk.StringVar()    
     algoritmoExatoExecutado = tk.BooleanVar(False)
-    algoritmoGeneticoHeuristicoExecutado = tk.BooleanVar(False)
+    algoritmoGeneticoMediaEsperadaExecutado = tk.BooleanVar(False)
     algoritmoGeneticoCustoLatenciaExecutado = tk.BooleanVar(False)
     telaAlgoritmoExatoVisitada = tk.BooleanVar(False)
-    telaAlgoritmoGeneticoHeuristicoVisitada = tk.BooleanVar(False)
+    telaAlgoritmoGeneticoMediaEsperadaVisitada = tk.BooleanVar(False)
     telaAlgoritmoGeneticoCustoLatenciaVisitada = tk.BooleanVar(False)
     telaDescricaoProblemaVisitada = tk.BooleanVar(False)
     telaSobreVisitada = tk.BooleanVar(False)
