@@ -696,8 +696,16 @@ class Sistema:
     #Monta a interface gráfica do sistema aSR4
     def __init__(self, janela):
       
-         #Título da janela
+        # Instruções
+        lblTitle=Label(janela, text="Problema SR4", font=("Helvetica", 48))
+        lblTitle.place(x=230, y=50)
+        
+        lblInst=Label(janela, text="Selecione na barra de menu a opção desejada", font=("Helvetica", 24))
+        lblInst.place(x=150, y=400)
+        
+        #Título da janela
         janela.title("Análise NP-Completo SR4: Custo de Recuperação Esperado")
+        
         #Tamanho da janela
         janela.geometry('800x600')
 
